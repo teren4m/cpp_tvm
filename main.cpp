@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <chrono>
+#include <SDL3/SDL.h>
 
 using namespace cv;
 using namespace std::chrono;

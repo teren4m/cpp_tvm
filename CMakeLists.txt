@@ -6,13 +6,19 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(cpp_tvm)
 
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_subdirectory(SDL)
+
+find_package(OpenCV REQUIRED )
+include_directories(
+                        ${OpenCV_INCLUDE_DIRS}
+                        SDL/include
+                        )
 
 add_executable(cpp_tvm main.cpp)
 
-target_link_libraries(cpp_tvm opencv_core)
-
-target_link_libraries(cpp_tvm ${OpenCV_LIBS} )
+target_link_libraries(cpp_tvm 
+                                ${OpenCV_LIBS} 
+                                SDL3::SDL3
+                                )
 
 
