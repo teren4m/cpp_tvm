@@ -8,7 +8,9 @@ project(cpp_tvm)
 
 add_subdirectory(SDL)
 
-find_package(OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
+find_package(GL REQUIRED)
+
 include_directories(
                         ${OpenCV_INCLUDE_DIRS}
                         SDL/include
