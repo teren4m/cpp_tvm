@@ -3,11 +3,14 @@
 #include <chrono>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_syswm.h>
+#include <bgfx/bgfx.h>
+#include <bgfx/platform.h>
 
 using namespace cv;
 using namespace std::chrono;
 
 SDL_Window *window = NULL;
+SDL_SysWMinfo wm_info;
 const int WIDTH = 640;
 const int HEIGHT = 480;
 
@@ -36,6 +39,20 @@ int main(int argc, char **argv)
             printf("Window could not be created! SDL_Error: %s\n",
                    SDL_GetError());
         }
+    }
+
+    SDL_version version;
+
+    SDL_VERSION(&version);
+    Uint32 num_version = SDL_VERSIONNUM(version.major, version.minor, version.patch);
+
+    SDL_Log("SDL version %u.%u.%u ...\n",
+            version.major, version.minor, version.patch);
+    SDL_Log("SDL num version %d ...\n", num_version);
+
+    if (!SDL_GetWindowWMInfo(window, &wm_info, num_version))
+    {
+        return 1;
     }
 
     bool quit = false;

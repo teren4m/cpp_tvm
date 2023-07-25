@@ -13,6 +13,17 @@ find_package(Threads REQUIRED)
 
 add_subdirectory(3rdparty)
 
+
+include_directories(    
+                        3rdparty/SDL/include
+                        3rdparty/bgfx/include
+                        3rdparty/bx/include
+                        3rdparty/bimg/include
+                        ${OpenCV_INCLUDE_DIRS}
+                        ${OPENGL_INCLUDE_DIRS}
+                        ${X11_INCLUDE_DIR}
+                        )
+
 add_executable(
                 cpp_tvm 
                 src/main.cpp
