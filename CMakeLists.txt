@@ -6,21 +6,27 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(cpp_tvm)
 
-add_subdirectory(SDL)
-
 find_package(OpenCV REQUIRED)
-find_package(GL REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(X11 REQUIRED)
+find_package(Threads REQUIRED)
 
-include_directories(
-                        ${OpenCV_INCLUDE_DIRS}
-                        SDL/include
-                        )
+add_subdirectory(3rdparty)
 
-add_executable(cpp_tvm main.cpp)
+add_executable(
+                cpp_tvm 
+                src/main.cpp
+                )
 
 target_link_libraries(cpp_tvm 
+                                ${OPENGL_LIBRARIES}
+                                ${X11_LIBRARIES}
                                 ${OpenCV_LIBS} 
                                 SDL3::SDL3
+                                pthread
+                                rt
+                                dl
+                                ${CMAKE_SOURCE_DIR}/3rdparty/bgfx/.build/linux64_gcc/bin/libbgfxRelease.a
                                 )
 
 
