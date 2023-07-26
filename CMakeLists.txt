@@ -29,15 +29,19 @@ add_executable(
                 src/main.cpp
                 )
 
+target_compile_options(cpp_tvm PRIVATE -DSDL_VIDEO_DRIVER_X11 -DBX_CONFIG_DEBUG)
+
 target_link_libraries(cpp_tvm 
                                 ${OPENGL_LIBRARIES}
                                 ${X11_LIBRARIES}
                                 ${OpenCV_LIBS} 
-                                SDL3::SDL3
+                                SDL2::SDL2
                                 pthread
                                 rt
                                 dl
                                 ${CMAKE_SOURCE_DIR}/3rdparty/bgfx/.build/linux64_gcc/bin/libbgfxRelease.a
+                                ${CMAKE_SOURCE_DIR}/3rdparty/bgfx/.build/linux64_gcc/bin/libbxRelease.a
+                                ${CMAKE_SOURCE_DIR}/3rdparty/bgfx/.build/linux64_gcc/bin/libbimgRelease.a
                                 )
 
 

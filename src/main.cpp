@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <chrono>
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_syswm.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
 
