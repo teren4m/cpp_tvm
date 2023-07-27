@@ -12,12 +12,14 @@ add_subdirectory(3rdparty)
 
 
 include_directories(    
+                        include
                         ${OpenCV_INCLUDE_DIRS}
                         )
 
 add_executable(
                 cpp_tvm 
                 src/main.cpp
+                src/receipt_nn.cpp
                 )
 
 target_link_libraries(cpp_tvm 
