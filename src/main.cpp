@@ -4,7 +4,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include <chrono>
-#include <receipt_nn.h>
+#include <receipt_nn.hpp>
 
 using namespace cv;
 using namespace std::chrono;
@@ -15,6 +15,8 @@ void DrawCircle(Mat img, Point center);
 
 milliseconds GetTime();
 
+ReceiptDetect receiptDetect;
+
 int main(int argc, char **argv)
 {
 
@@ -23,6 +25,7 @@ int main(int argc, char **argv)
     // array to hold image
     Mat frame;
     Point circle_point(30, 30);
+    milliseconds ms_prev_curr = GetTime();
 
     // display the frame until you press a keygit adds
     while (1)
@@ -38,7 +41,11 @@ int main(int argc, char **argv)
         milliseconds ms_curr = GetTime();
         int diff = (ms_curr - ms_prev).count();
         int fps = 1000 / diff;
-        std::cout << "Fps: " << std::to_string(fps) << std::endl;
+        if ((ms_curr.count() - ms_prev_curr.count()) > 2000)
+        {
+            std::cout << "Fps: " << std::to_string(fps) << std::endl;
+            ms_prev_curr = ms_curr;
+        }
         imshow("some", frame);
         // wait (10ms) for esc key to be pressed to stop
         if (waitKey(10) == 27)
@@ -59,7 +66,7 @@ void DrawCircle(Mat img, Point center)
 
 bool IsReceipt(Mat frame)
 {
-    return detect_receipt();
+    return receiptDetect.detect_receipt();
 }
 
 milliseconds GetTime()
