@@ -34,7 +34,9 @@ int main(int argc, char **argv)
         // capture the next frame from the webcam
         camera >> frame;
         // show the image on the window
-        if (IsReceipt(frame))
+        cv::Mat img_dst;
+        cv::resize(frame, img_dst, cv::Size(400, 400), 0, 0, cv::INTER_AREA);
+        if (IsReceipt(img_dst))
         {
             DrawCircle(frame, circle_point);
         }
@@ -66,8 +68,8 @@ void DrawCircle(Mat img, Point center)
 
 bool IsReceipt(Mat frame)
 {
-    unsigned char* dataMat = frame.data;
-    return receiptDetect.detect_receipt((char *) dataMat);
+    unsigned char *dataMat = frame.data;
+    return receiptDetect.detect_receipt((char *)dataMat);
 }
 
 milliseconds GetTime()

@@ -39,3 +39,28 @@ int TVMRunner::SetInput(std::string input_id, char *raw_input)
     in_arr.CopyFromBytes(raw_input, ssize);
     return 0;
 }
+
+/*!
+ * \brief Get output of the model as a binary buffer.
+ * \param output_id output node name to read the data.
+ * \param raw_output the buffer to copy the data to.
+ * \param 0 on success else error code.
+ */
+int TVMRunner::GetOutput(std::string output_id, char* raw_output) {
+  tvm::runtime::NDArray out_arr = graph_handle.GetFunction("get_output")(output_id);
+  auto ssize = GetMemSize(out_arr);
+  out_arr.CopyToBytes(raw_output, ssize);
+  return 0;
+}
+
+/*!
+ * \brief Call one cycle of execution for the model.
+ * \param 0 on success else error code.
+ */
+int TVMRunner::Run(void)
+{
+    // LOG(INFO) << "TVMRunner::Run";
+    // r_run_was_called = true;
+    graph_handle.GetFunction("run")();
+    return 0;
+}
