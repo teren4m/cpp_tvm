@@ -11,11 +11,12 @@
 /*!
  * \brief various meta information related to the compiled TVM model.
  */
-typedef struct _TVMMetaInfo {
-  int n_inputs;
-  int n_outputs;
-  std::map<std::string, std::pair<std::vector<int>, std::string>> input_info;
-  std::map<std::string, std::pair<std::vector<int>, std::string>> output_info;
+typedef struct _TVMMetaInfo
+{
+    int n_inputs;
+    int n_outputs;
+    std::map<std::string, std::pair<std::vector<int>, std::string>> input_info;
+    std::map<std::string, std::pair<std::vector<int>, std::string>> output_info;
 } TVMMetaInfo;
 
 class TVMRunner
@@ -26,6 +27,15 @@ public:
 
     /*! \brief Initiates graph runtime and with the compiled model */
     int Load(void);
+
+    /*! \brief Executes one inference cycle */
+    int Run(void);
+
+    /*! \brief To set the input from binary data */
+    int SetInput(std::string, char *);
+
+    /*! \brief Get the model output in binary format */
+    int GetOutput(std::string, char *);
 
 private:
     /*! \brief Module handle for the shared object */

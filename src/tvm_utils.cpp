@@ -5,6 +5,7 @@
 #include <tvm/runtime/module.h>
 #include <tvm/runtime/packed_func.h>
 #include <tvm/runtime/registry.h>
+#include <tvm_utils.hpp>
 
 /*!
  * \brief Get the TVM device id corresponding to device string.
@@ -76,4 +77,18 @@ std::string ReadParamsModel(std::string model_params_path)
                                  std::istreambuf_iterator<char>());
     params_reader.close();
     return params_str;
+}
+
+/*!
+ * \brief Calculated the memory size for the NDArray.
+ * \param NDArray object.
+ * \return size of the memory.
+ */
+size_t GetMemSize(tvm::runtime::NDArray& narr) {
+  size_t size = 1;
+  for (tvm_index_t i = 0; i < narr->ndim; ++i) {
+    size *= static_cast<size_t>(narr->shape[i]);
+  }
+  size *= (narr->dtype.bits * narr->dtype.lanes + 7) / 8;
+  return size;
 }

@@ -66,7 +66,8 @@ void DrawCircle(Mat img, Point center)
 
 bool IsReceipt(Mat frame)
 {
-    return receiptDetect.detect_receipt();
+    unsigned char* dataMat = frame.data;
+    return receiptDetect.detect_receipt((char *) dataMat);
 }
 
 milliseconds GetTime()

@@ -11,7 +11,8 @@ ReceiptDetect::ReceiptDetect()
     tvmRunner->Load();
 }
 
-bool ReceiptDetect::detect_receipt()
+bool ReceiptDetect::detect_receipt(char* dataMat)
 {   
+    tvmRunner->SetInput("input_1", dataMat);
     return false;
 }

@@ -5,7 +5,7 @@ class ReceiptDetect
 {
 public:
     ReceiptDetect();
-    bool detect_receipt();
+    bool detect_receipt(char* dataMat);
 
 private:
     TVMRunner *tvmRunner;
