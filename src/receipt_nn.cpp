@@ -21,6 +21,6 @@ bool ReceiptDetect::detect_receipt(char *dataMat)
     tvmRunner->SetInput("input_1", dataMat);
     tvmRunner->Run();
     tvmRunner->GetOutput("tvmgen_default_fused_nn_contrib_dense_pack_add_sigmoid", u.b);
-    LOG(INFO) << u.f;
+    // LOG(INFO) << sizeof( u.f );
     return false;
 }

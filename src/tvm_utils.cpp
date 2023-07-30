@@ -84,11 +84,28 @@ std::string ReadParamsModel(std::string model_params_path)
  * \param NDArray object.
  * \return size of the memory.
  */
-size_t GetMemSize(tvm::runtime::NDArray& narr) {
-  size_t size = 1;
-  for (tvm_index_t i = 0; i < narr->ndim; ++i) {
-    size *= static_cast<size_t>(narr->shape[i]);
-  }
-  size *= (narr->dtype.bits * narr->dtype.lanes + 7) / 8;
-  return size;
+size_t GetMemSize(tvm::runtime::NDArray &narr)
+{
+    size_t size = 1;
+    for (tvm_index_t i = 0; i < narr->ndim; ++i)
+    {
+        size *= static_cast<size_t>(narr->shape[i]);
+    }
+    size *= (narr->dtype.bits * narr->dtype.lanes + 7) / 8;
+    return size;
+}
+
+void PrintNDArrayShape(tvm::runtime::NDArray &narr)
+{
+    std::string shape = "[";
+    for (tvm_index_t i = 0; i < narr->ndim; ++i)
+    {
+        if (i)
+        {
+            shape += ",";
+        }
+        shape += std::to_string(static_cast<size_t>(narr->shape[i]));
+    }
+    shape += "]";
+    LOG(INFO) << shape;
 }

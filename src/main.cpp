@@ -35,7 +35,7 @@ int main(int argc, char **argv)
         camera >> frame;
         // show the image on the window
         cv::Mat img_dst;
-        cv::resize(frame, img_dst, cv::Size(400, 400), 0, 0, cv::INTER_AREA);
+        cv::resize(frame, img_dst, cv::Size(200, 200), 0, 0, cv::INTER_AREA);
         if (IsReceipt(img_dst))
         {
             DrawCircle(frame, circle_point);
