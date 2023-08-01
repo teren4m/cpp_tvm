@@ -8,6 +8,9 @@ ReceiptDetect::ReceiptDetect()
     std::string device = "llvm";
     tvmRunner = new TVMRunner(model_path, device);
     tvmRunner->Load();
+    // Query Model meta Information
+    TVMMetaInfo mInfo = tvmRunner->GetMetaInfo();
+    tvmRunner->PrintMetaInfo();
 }
 
 bool ReceiptDetect::detect_receipt(char *dataMat)
@@ -21,6 +24,6 @@ bool ReceiptDetect::detect_receipt(char *dataMat)
     tvmRunner->SetInput("input_1", dataMat);
     tvmRunner->Run();
     tvmRunner->GetOutput("tvmgen_default_fused_nn_contrib_dense_pack_add_sigmoid", u.b);
-    // LOG(INFO) << sizeof( u.f );
+    LOG(INFO) << u.f;
     return false;
 }

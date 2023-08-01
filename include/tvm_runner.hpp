@@ -37,6 +37,12 @@ public:
     /*! \brief Get the model output in binary format */
     int GetOutput(std::string, char *);
 
+    /*! \brief Populates various meta information from graph runtime */
+    TVMMetaInfo GetMetaInfo(void);
+
+    /*! \brief Print function to show all meta information */
+    void PrintMetaInfo(void);
+
 private:
     /*! \brief Module handle for the shared object */
     tvm::runtime::Module mod_handle;
@@ -46,6 +52,8 @@ private:
     std::string model_path;
     /*! \brief The target device */
     std::string device;
+    /*! \brief Holds meta information queried from graph runtime */
+    TVMMetaInfo mInfo;
     // /*! \brief Holds meta information queried from graph runtime */
     // TVMMetaInfo mInfo;
     /*! \brief Mark if the run method was called */

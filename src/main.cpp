@@ -33,9 +33,11 @@ int main(int argc, char **argv)
         milliseconds ms_prev = GetTime();
         // capture the next frame from the webcam
         camera >> frame;
+        Mat output_frame;
+        frame.convertTo(output_frame, CV_32F);
         // show the image on the window
         cv::Mat img_dst;
-        cv::resize(frame, img_dst, cv::Size(200, 200), 0, 0, cv::INTER_AREA);
+        cv::resize(output_frame, img_dst, cv::Size(200, 200), 0, 0, cv::INTER_AREA);
         if (IsReceipt(img_dst))
         {
             DrawCircle(frame, circle_point);
@@ -64,6 +66,47 @@ void DrawCircle(Mat img, Point center)
            Scalar(0, 0, 255),
            FILLED,
            LINE_8);
+}
+
+std::string type2str(int type)
+{
+    std::string r;
+
+    uchar depth = type & CV_MAT_DEPTH_MASK;
+    uchar chans = 1 + (type >> CV_CN_SHIFT);
+
+    switch (depth)
+    {
+    case CV_8U:
+        r = "8U";
+        break;
+    case CV_8S:
+        r = "8S";
+        break;
+    case CV_16U:
+        r = "16U";
+        break;
+    case CV_16S:
+        r = "16S";
+        break;
+    case CV_32S:
+        r = "32S";
+        break;
+    case CV_32F:
+        r = "32F";
+        break;
+    case CV_64F:
+        r = "64F";
+        break;
+    default:
+        r = "User";
+        break;
+    }
+
+    r += "C";
+    r += (chans + '0');
+
+    return r;
 }
 
 bool IsReceipt(Mat frame)

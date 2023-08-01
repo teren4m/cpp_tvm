@@ -28,7 +28,21 @@ add_executable(
                 src/tvm_utils.cpp
                 )
 
+add_executable(
+                cpp_tvm_img 
+                src/main_img.cpp
+                src/receipt_nn.cpp
+                src/tvm_runner.cpp
+                src/tvm_utils.cpp
+                )
+
 target_link_libraries(cpp_tvm 
+                                ${OpenCV_LIBS} 
+                                tvm
+                                tvm_runtime
+                                )
+
+target_link_libraries(cpp_tvm_img 
                                 ${OpenCV_LIBS} 
                                 tvm
                                 tvm_runtime
