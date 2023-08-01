@@ -17,13 +17,13 @@ int main(int argc, char **argv)
 
     Mat img = imread(img_path);
 
-    Mat img_dst;
-    resize(img, img_dst, Size(200, 200), 0, 0, cv::INTER_AREA);
-
     Mat output_frame;
-    img_dst.convertTo(output_frame, CV_32F);
+    img.convertTo(output_frame, CV_32F);
 
-    unsigned char *dataMat = output_frame.data;
+    Mat img_dst;
+    resize(output_frame, img_dst, Size(200, 200), 0, 0, cv::INTER_LANCZOS4);
+
+    unsigned char *dataMat = img_dst.data;
     receiptDetect.detect_receipt((char *)dataMat);
 
     return 0;

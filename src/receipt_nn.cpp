@@ -25,5 +25,5 @@ bool ReceiptDetect::detect_receipt(char *dataMat)
     tvmRunner->Run();
     tvmRunner->GetOutput("tvmgen_default_fused_nn_contrib_dense_pack_add_sigmoid", u.b);
     LOG(INFO) << u.f;
-    return false;
+    return u.f > 0.5;
 }
